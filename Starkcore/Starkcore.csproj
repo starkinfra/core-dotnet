@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ReleaseVersion>0.0.8</ReleaseVersion>
+    <Version>0.0.8</Version>
+    <PackageId>starkcore</PackageId>
+    <Authors>Starkcore</Authors>
+    <Description>Core functionalities for the StarkInfra and StarkBank Dotnet SDKs</Description>
+    <PackageTags>StarkBank StarkInfra</PackageTags>
+    <PackageProjectUrl>https://github.com/starkinfra/core-dotnet</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/starkinfra/core-dotnet</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <SynchReleaseVersion>false</SynchReleaseVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <LangVersion>10.0</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <LangVersion>10.0</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="user\" />
+    <None Remove="utils\" />
+    <None Remove="Settings\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="user\" />
+    <Folder Include="utils\" />
+    <Folder Include="Settings\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="starkbank-ecdsa" Version="1.3.3" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+  </ItemGroup>
+</Project>
