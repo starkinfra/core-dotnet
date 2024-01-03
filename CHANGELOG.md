@@ -14,3 +14,4 @@ Given a version number MAJOR.MINOR.PATCH, increment:
 ## [Unreleased]
 ### Added
 - basic functionalities for StarkBank and StarkInfra SDKs
+- starkcore NuGetREADME.md
