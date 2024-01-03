@@ -2,10 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <ReleaseVersion>0.0.8</ReleaseVersion>
-    <Version>0.0.8</Version>
+    <ReleaseVersion>0.0.9</ReleaseVersion>
+    <Version>0.0.9</Version>
     <PackageId>starkcore</PackageId>
-    <Authors>Starkcore</Authors>
+    <Authors>starkinfra</Authors>
     <Description>Core functionalities for the StarkInfra and StarkBank Dotnet SDKs</Description>
     <PackageTags>StarkBank StarkInfra</PackageTags>
     <PackageProjectUrl>https://github.com/starkinfra/core-dotnet</PackageProjectUrl>
