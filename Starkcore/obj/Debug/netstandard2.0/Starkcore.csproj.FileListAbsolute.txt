@@ -1,0 +1,10 @@
+/Users/caiodottori/Git/sdk/starkcore/core-dotnet/Starkcore/bin/Debug/netstandard2.0/Starkcore.deps.json
+/Users/caiodottori/Git/sdk/starkcore/core-dotnet/Starkcore/bin/Debug/netstandard2.0/Starkcore.dll
+/Users/caiodottori/Git/sdk/starkcore/core-dotnet/Starkcore/bin/Debug/netstandard2.0/Starkcore.pdb
+/Users/caiodottori/Git/sdk/starkcore/core-dotnet/Starkcore/obj/Debug/netstandard2.0/Starkcore.csproj.AssemblyReference.cache
+/Users/caiodottori/Git/sdk/starkcore/core-dotnet/Starkcore/obj/Debug/netstandard2.0/Starkcore.GeneratedMSBuildEditorConfig.editorconfig
+/Users/caiodottori/Git/sdk/starkcore/core-dotnet/Starkcore/obj/Debug/netstandard2.0/Starkcore.AssemblyInfoInputs.cache
+/Users/caiodottori/Git/sdk/starkcore/core-dotnet/Starkcore/obj/Debug/netstandard2.0/Starkcore.AssemblyInfo.cs
+/Users/caiodottori/Git/sdk/starkcore/core-dotnet/Starkcore/obj/Debug/netstandard2.0/Starkcore.csproj.CoreCompileInputs.cache
+/Users/caiodottori/Git/sdk/starkcore/core-dotnet/Starkcore/obj/Debug/netstandard2.0/Starkcore.dll
+/Users/caiodottori/Git/sdk/starkcore/core-dotnet/Starkcore/obj/Debug/netstandard2.0/Starkcore.pdb

@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <ReleaseVersion>0.0.8</ReleaseVersion>
+    <ReleaseVersion>0.0.9</ReleaseVersion>
     <Version>0.0.8</Version>
     <PackageId>starkcore</PackageId>
     <Authors>Starkcore</Authors>
@@ -11,7 +11,7 @@
     <PackageProjectUrl>https://github.com/starkinfra/core-dotnet</PackageProjectUrl>
     <RepositoryUrl>https://github.com/starkinfra/core-dotnet</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <SynchReleaseVersion>false</SynchReleaseVersion>
+    <RootNamespace>StarkCore</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">

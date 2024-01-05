@@ -1,0 +1,3 @@
+is_global = true
+build_property.RootNamespace = StarkCore
+build_property.ProjectDir = /Users/caiodottori/Git/sdk/starkcore/core-dotnet/Starkcore/
