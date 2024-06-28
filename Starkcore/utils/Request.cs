@@ -9,22 +9,23 @@ using StarkCore.Error;
 using StarkCore.Utils;
 using System.Security.Cryptography;
 using System.Xml.Linq;
+using System.Text;
 
 
 namespace StarkCore.Utils
 {
-    internal class Response
+    public class Response
     {
-        internal byte[] ByteContent { get; }
-        internal int Status { get; }
+        public byte[] ByteContent { get; }
+        public int Status { get; }
 
-        internal Response(byte[] byteContent, int status)
+        public Response(byte[] byteContent, int status)
         {
             ByteContent = byteContent;
             Status = status;
         }
 
-        internal string Content
+        public string Content
         {
             get
             {
@@ -32,7 +33,7 @@ namespace StarkCore.Utils
             }
         }
 
-        internal JObject Json()
+        public JObject Json()
         {
             return Utils.Json.Decode(Content);
         }
@@ -53,7 +54,8 @@ namespace StarkCore.Utils
         internal static readonly HttpMethod Patch = new HttpMethod("PATCH");
         internal static readonly HttpMethod Delete = new HttpMethod("DELETE");
 
-        internal static Response Fetch(User user, HttpMethod method, string path, string host, string apiVersion, string sdkVersion, Dictionary<string, object> payload = null, Dictionary<string, object> query = null)
+
+        internal static Response Fetch(User user, HttpMethod method, string path, string host, string apiVersion, string sdkVersion, Dictionary<string, object> payload = null, Dictionary<string, object> query = null, string prefix = null, bool raiseException = true)
         {
             user = Checks.CheckUser(user);
 
@@ -92,19 +94,37 @@ namespace StarkCore.Utils
                 httpRequestMessage.Content = new StringContent(body);
             }
 
-            httpRequestMessage.Headers.TryAddWithoutValidation("Access-Id", user.AccessId());
+            prefix = prefix != null ? prefix += '-' : null;
+
+            httpRequestMessage.Headers.TryAddWithoutValidation("Access-Id",  user.AccessId());
             httpRequestMessage.Headers.TryAddWithoutValidation("Access-Time", accessTime);
             httpRequestMessage.Headers.TryAddWithoutValidation("Access-Signature", signature);
             httpRequestMessage.Headers.TryAddWithoutValidation("Content-Type", "application/json");
             httpRequestMessage.Headers.TryAddWithoutValidation("Accept-Language", Settings.Language);
-            httpRequestMessage.Headers.TryAddWithoutValidation("User-Agent", $".NET-{Environment.Version}-SDK-Infra-{sdkVersion}");
+            httpRequestMessage.Headers.TryAddWithoutValidation("User-Agent", $"{prefix}.NET-{Environment.Version}-SDK-Infra-{sdkVersion}");
 
-            var result = Client.SendAsync(httpRequestMessage).Result;
+            Response response;
 
-            Response response = new Response(
-                result.Content.ReadAsByteArrayAsync().Result,
-                (int)result.StatusCode
-            );
+            try
+            {
+                var result = Client.SendAsync(httpRequestMessage).Result;
+                response = new Response(
+                    result.Content.ReadAsByteArrayAsync().Result,
+                    (int)result.StatusCode
+                );
+
+            } catch (Exception error)
+            {
+                response = new Response(
+                    Encoding.ASCII.GetBytes(error.Message.ToString()),
+                    0
+                );
+            }
+
+            if (!raiseException)
+            {
+                return response;
+            }
 
             if (response.Status == 500)
             {

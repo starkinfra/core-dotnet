@@ -12,6 +12,9 @@ Given a version number MAJOR.MINOR.PATCH, increment:
 - PATCH version when backwards compatible bug **fixes** are implemented.
 
 ## [Unreleased]
+### Added
+- restRaw methods
+- restRaw tests
 
 ## [0.0.9] - 2024-01-05
 ### Added
