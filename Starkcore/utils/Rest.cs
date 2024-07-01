@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System;
 using Newtonsoft.Json.Linq;
+using System.Collections;
 
 namespace StarkCore.Utils
 {
@@ -171,21 +172,6 @@ namespace StarkCore.Utils
             return Api.FromApiJson(resourceMaker, json);
         }
 
-
-        static public JObject PostRaw(string path, User user, string host, string apiVersion, string sdkVersion, Dictionary<string, object> payload = null, Dictionary<string, object> query = null)
-        {
-            return Request.Fetch(
-                host: host,
-                apiVersion: apiVersion,
-                sdkVersion: sdkVersion,
-                user: user,
-                method: Request.Post,
-                path: path,
-                query: query,
-                payload: Api.ApiJson(payload)
-            ).Json();
-        }
-
         static public SubResource DeleteId(string resourceName, Api.ResourceMaker resourceMaker, string id, User user, string host, string apiVersion, string sdkVersion)
         {
             dynamic json = Request.Fetch(
@@ -225,6 +211,84 @@ namespace StarkCore.Utils
                 payload: payload
             ).Json()[Api.LastName(subResourceName)];
             return Api.FromApiJson(subResourceMaker, json);
+        }
+
+        static public Response GetRaw(string path, Dictionary<string, object> query, User user, string host, string apiVersion, string sdkVersion, string prefix = null, bool raiseException = true)
+        {
+            return Request.Fetch(
+                host: host,
+                apiVersion: apiVersion,
+                sdkVersion: sdkVersion,
+                user: user,
+                method: Request.Get,
+                path: path,
+                query: query,
+                prefix: prefix,
+                raiseException: raiseException
+            );
+        }
+
+        static public Response PostRaw(string path, User user, string host, string apiVersion, string sdkVersion, Dictionary<string, object> payload = null, Dictionary<string, object> query = null, string prefix = null, bool raiseException = true)
+        {
+            return Request.Fetch(
+                host: host,
+                apiVersion: apiVersion,
+                sdkVersion: sdkVersion,
+                user: user,
+                method: Request.Post,
+                path: path,
+                query: query,
+                payload: Api.ApiJson(payload),
+                prefix: prefix,
+                raiseException: raiseException
+            );
+        }
+
+        static public Response PatchRaw(string path, User user, string host, string apiVersion, string sdkVersion, Dictionary<string, object> payload = null, Dictionary<string, object> query = null, string prefix = null, bool raiseException = true)
+        {
+            return Request.Fetch(
+                host: host,
+                apiVersion: apiVersion,
+                sdkVersion: sdkVersion,
+                user: user,
+                method: Request.Patch,
+                path: path,
+                query: query,
+                payload: Api.ApiJson(payload),
+                prefix: prefix,
+                raiseException: raiseException
+            );
+        }
+
+        static public Response PutRaw(string path, User user, string host, string apiVersion, string sdkVersion, Dictionary<string, object> payload = null, Dictionary<string, object> query = null, string prefix = null, bool raiseException = true)
+        {
+            return Request.Fetch(
+                host: host,
+                apiVersion: apiVersion,
+                sdkVersion: sdkVersion,
+                user: user,
+                method: Request.Put,
+                path: path,
+                query: query,
+                payload: Api.ApiJson(payload),
+                prefix: prefix,
+                raiseException: raiseException
+            );
+        }
+
+        static public Response DeleteRaw(string path, User user, string host, string apiVersion, string sdkVersion, Dictionary<string, object> payload = null, Dictionary<string, object> query = null, string prefix = null, bool raiseException = true)
+        {
+            return Request.Fetch(
+                host: host,
+                apiVersion: apiVersion,
+                sdkVersion: sdkVersion,
+                user: user,
+                method: Request.Delete,
+                path: path,
+                query: query,
+                prefix: prefix,
+                raiseException: raiseException
+            );
         }
 
     }
