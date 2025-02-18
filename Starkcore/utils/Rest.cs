@@ -212,6 +212,20 @@ namespace StarkCore.Utils
             ).Json()[Api.LastName(subResourceName)];
             return Api.FromApiJson(subResourceMaker, json);
         }
+        
+        static public SubResource PostSubResource(string resourceName, Api.ResourceMaker subResourceMaker, string subResourceName, string id, User user, string host, string apiVersion, string sdkVersion, Dictionary<string, object> payload = null)
+        {
+            dynamic json = Request.Fetch(
+                host: host,
+                apiVersion: apiVersion,
+                sdkVersion: sdkVersion,
+                user: user,
+                method: Request.Post,
+                path: $"{Api.Endpoint(resourceName)}/{id}/{Api.Endpoint(subResourceName)}",
+                payload: payload
+            ).Json()[Api.LastName(subResourceName)];
+            return Api.FromApiJson(subResourceMaker, json);
+        }
 
         static public Response GetRaw(string path, Dictionary<string, object> query, User user, string host, string apiVersion, string sdkVersion, string prefix = null, bool raiseException = true)
         {
