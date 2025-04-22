@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <ReleaseVersion>0.1.0</ReleaseVersion>
-    <Version>0.1.0</Version>
+    <ReleaseVersion>0.1.1</ReleaseVersion>
+    <Version>0.1.1</Version>
     <LangVersion>10.0</LangVersion>
     <PackageId>starkcore</PackageId>
     <Authors>Starkcore</Authors>
