@@ -4,6 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <ReleaseVersion>0.1.0</ReleaseVersion>
     <Version>0.1.0</Version>
+    <LangVersion>10.0</LangVersion>
     <PackageId>starkcore</PackageId>
     <Authors>Starkcore</Authors>
     <Description>Core functionalities for the StarkInfra and StarkBank Dotnet SDKs</Description>
@@ -21,12 +22,6 @@
     <None Include="../README.md" Pack="true" PackagePath="\"/>
   </ItemGroup>
 
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <LangVersion>10.0</LangVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <LangVersion>10.0</LangVersion>
-  </PropertyGroup>
   <ItemGroup>
     <None Remove="user\" />
     <None Remove="utils\" />

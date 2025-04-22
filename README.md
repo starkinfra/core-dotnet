@@ -1,4 +1,4 @@
-﻿# Stark Core Dotnet SDCH
+﻿# Stark Core Dotnet SDK
 
 Welcome to the Stark Core Dotnet SDK!
 This tool offers the basic functionalities used by our starkbank and starkinfra Dotnet SDKs to operate our APIs. 

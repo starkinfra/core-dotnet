@@ -12,7 +12,7 @@ Given a version number MAJOR.MINOR.PATCH, increment:
 - PATCH version when backwards compatible bug **fixes** are implemented.
 
 ## [Unreleased]
-### Added
+### Fixed
 - PostSubResource method
 
 ## [0.1.0] - 2024-07-01
