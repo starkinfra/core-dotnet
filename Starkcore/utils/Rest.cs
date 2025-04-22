@@ -213,7 +213,7 @@ namespace StarkCore.Utils
             return Api.FromApiJson(subResourceMaker, json);
         }
         
-        static public SubResource PostSubResource(string resourceName, Api.ResourceMaker subResourceMaker, string subResourceName, string id, User user, string host, string apiVersion, string sdkVersion, Dictionary<string, object> payload = null)
+        static public SubResource PostSubResource(string resourceName, Api.ResourceMaker subResourceMaker, string subResourceName, string id, User user, string host, string apiVersion, string sdkVersion, SubResource entity = null)
         {
             dynamic json = Request.Fetch(
                 host: host,
@@ -222,7 +222,7 @@ namespace StarkCore.Utils
                 user: user,
                 method: Request.Post,
                 path: $"{Api.Endpoint(resourceName)}/{id}/{Api.Endpoint(subResourceName)}",
-                payload: payload
+                payload: Api.ApiJson(entity)
             ).Json()[Api.LastName(subResourceName)];
             return Api.FromApiJson(subResourceMaker, json);
         }
