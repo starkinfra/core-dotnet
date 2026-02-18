@@ -95,6 +95,32 @@ namespace StarkCoreTests
         }
     }
 
+    public partial class SplitProfile : Resource
+    {
+        public string Interval { get; }
+        public int Delay { get; }
+
+        public SplitProfile(string interval, int delay, string id = null) : base(id)
+        {
+            Interval = interval;
+            Delay = delay;
+        }
+        
+        internal static (string resourceName, ResourceMaker resourceMaker) Resource()
+        {
+            return (resourceName: "split-profile", resourceMaker: ResourceMaker);
+        }
+
+        internal static Resource ResourceMaker(dynamic json)
+        {
+            string interval = json.interval;
+            int delay = json.delay;
+            string id = json.id;
+
+            return new SplitProfile(interval: interval, delay: delay, id: id);
+        }
+    }
+
     public class TestRestGet
     {
 
@@ -262,6 +288,31 @@ namespace StarkCoreTests
 
             Assert.NotNull(deletedWebhook);
 
+        }
+    }
+
+    public class TestRestPut
+    {
+        public readonly User user = TestUser.SetDefaultProject();
+
+        [Fact]
+
+        public void Put()
+        {
+            (string resourceName, ResourceMaker resourceMaker) = SplitProfile.Resource();
+            List<SplitProfile> splitProfiles = Rest.Put(
+                host: "bank",
+                apiVersion: "v2",
+                sdkVersion: "0.2.0",
+                resourceName: resourceName,
+                resourceMaker: resourceMaker,
+                entities: new List<SplitProfile>() { new SplitProfile(interval: "day", delay: 0) },
+                user: user
+            ).ToList().ConvertAll(o => (SplitProfile)o);
+
+            Assert.NotNull(splitProfiles[0].ID);
+            Assert.Equal("day", splitProfiles[0].Interval);
+            Assert.Equal(0, splitProfiles[0].Delay);
         }
     }
 
