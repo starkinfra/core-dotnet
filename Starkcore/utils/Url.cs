@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 
 
 namespace StarkCore.Utils
@@ -26,7 +27,7 @@ namespace StarkCore.Utils
                 }
                 else
                 {
-                    value = entry.Value.ToString();
+                    value = System.Convert.ToString(entry.Value, CultureInfo.InvariantCulture);
                 }
 
                 queryStringList.Add(entry.Key + "=" + System.Web.HttpUtility.UrlEncode(value));

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Globalization;
 using System.Collections.Generic;
 
 
@@ -16,7 +17,7 @@ namespace StarkCore.Utils
             string ReturnID = "D";
 
             ReturnID += bankCode;
-            ReturnID += DateTime.Now.ToString(@"yyyyMMddhhmm");
+            ReturnID += DateTime.Now.ToString(@"yyyyMMddhhmm", CultureInfo.InvariantCulture);
 
             foreach (int i in range)
             {

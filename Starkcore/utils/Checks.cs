@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Collections.Generic;
 using EllipticCurve;
 using StarkCore;
@@ -51,7 +52,7 @@ public static class Checks
 
     public static DateTime CheckDateTime(string data)
     {
-        return DateTime.Parse(data);
+        return DateTime.Parse(data, CultureInfo.InvariantCulture);
     }
 
     public static DateTime? CheckNullableDateTime(string data)

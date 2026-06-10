@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 
 namespace StarkCore.Utils
@@ -17,7 +18,7 @@ namespace StarkCore.Utils
             if (Value == null)
                 return null;
             DateTime value = (DateTime)Value;
-            return value.ToString("yyyy-MM-dd");
+            return value.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
         }
     }
 
@@ -35,7 +36,7 @@ namespace StarkCore.Utils
             if (Value == null)
                 return null;
             DateTime value = (DateTime)Value;
-            return value.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.ffffff") + "+00:00";
+            return value.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.ffffff", CultureInfo.InvariantCulture) + "+00:00";
         }
     }
 }

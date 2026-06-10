@@ -75,7 +75,7 @@ namespace StarkCore.Utils
                 url += Url.Encode(query);
             }
 
-            string accessTime = DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds.ToString(new CultureInfo("en-US"));
+            string accessTime = DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds.ToString(CultureInfo.InvariantCulture);
             string body = "";
             if (payload != null)
             {
