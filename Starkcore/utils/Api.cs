@@ -135,6 +135,10 @@ namespace StarkCore.Utils
             {
                 return $"{lastName.Remove(lastName.Length - 1)}ies";
             }
+            if (lastName.EndsWith("ch") || lastName.EndsWith("sh") || lastName.EndsWith("x"))
+            {
+                return $"{lastName}es";
+            }
             return $"{lastName}s";
         }
 

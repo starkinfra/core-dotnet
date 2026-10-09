@@ -12,6 +12,9 @@ Given a version number MAJOR.MINOR.PATCH, increment:
 - PATCH version when backwards compatible bug **fixes** are implemented.
 
 ## [Unreleased]
+### Fixed
+- plural of resource names ending in "ch", "sh" or "x", which now take "es" (speech becomes speeches)
+- Dictionary<string, object> and Dictionary<string, string> properties printed as type names in SubResource.ToString
 
 ## [0.2.0] - 2026-03-03
 ### Added
