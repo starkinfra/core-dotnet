@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Linq;
+using System.Globalization;
+using System.Collections;
 using System.Reflection;
 using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
 
 
 namespace StarkCore.Utils
@@ -56,6 +59,10 @@ namespace StarkCore.Utils
                     }
                     stringValue = "{ " + string.Join(", ", stringDictList) + " }";
                 }
+                else if (entry.Value is Dictionary<string, object> || entry.Value is Dictionary<string, string>)
+                {
+                    stringValue = DictionaryToString(entry.Value);
+                }
                 else
                 {
                     stringValue = entry.Value.ToString();
@@ -69,6 +76,55 @@ namespace StarkCore.Utils
             string core = string.Join("," + newLine + spacer, fields);
 
             return GetType().Name + "(" + newLine + spacer + core + newLine + ")";
+        }
+
+        // Values parsed from API responses are JTokens, not CLR collections.
+        private static string ValueToString(object value)
+        {
+            if (value is null)
+            {
+                return "null";
+            }
+            if (value is JValue jValue)
+            {
+                return ValueToString(jValue.Value);
+            }
+            if (value is JArray jArray)
+            {
+                return "{ " + string.Join(", ", jArray.Select(item => ValueToString(item))) + " }";
+            }
+            if (value is JObject jObject)
+            {
+                return "{ " + string.Join(", ", jObject.Properties().Select(prop => PairToString(prop.Name, prop.Value))) + " }";
+            }
+            if (value is List<string> stringList)
+            {
+                return "{ " + string.Join(", ", stringList) + " }";
+            }
+            if (value is Dictionary<string, object> || value is Dictionary<string, string>)
+            {
+                return DictionaryToString(value);
+            }
+            if (value is IFormattable formattable)
+            {
+                return formattable.ToString(null, CultureInfo.InvariantCulture);
+            }
+            return value.ToString();
+        }
+
+        private static string DictionaryToString(object dictionary)
+        {
+            List<string> pairs = new List<string>();
+            foreach (DictionaryEntry entry in (IDictionary)dictionary)
+            {
+                pairs.Add(PairToString(entry.Key.ToString(), entry.Value));
+            }
+            return "{ " + string.Join(", ", pairs) + " }";
+        }
+
+        private static string PairToString(string key, object value)
+        {
+            return "{ " + key + ", " + ValueToString(value) + " }";
         }
 
         public Dictionary<string, object> ToJson()
