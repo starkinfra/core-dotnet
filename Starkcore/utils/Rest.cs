@@ -144,6 +144,52 @@ namespace StarkCore.Utils
             return returnedEntities;
         }
 
+        static public IEnumerable<SubResource> PatchMulti(string resourceName, Api.ResourceMaker resourceMaker, IEnumerable<SubResource> entities, User user, string host, string apiVersion, string sdkVersion, Dictionary<string, object> query = null)
+        {
+            List<Dictionary<string, object>> jsons = new List<Dictionary<string, object>>();
+            foreach (SubResource entity in entities)
+            {
+                jsons.Add(Api.ApiJson(entity));
+            }
+            return PrivatePatchMulti(resourceName, resourceMaker, jsons, user, host, apiVersion, sdkVersion, query);
+        }
+
+        static public IEnumerable<SubResource> PatchMulti(string resourceName, Api.ResourceMaker resourceMaker, IEnumerable<Dictionary<string, object>> entities, User user, string host, string apiVersion, string sdkVersion, Dictionary<string, object> query = null)
+        {
+            List<Dictionary<string, object>> jsons = new List<Dictionary<string, object>>();
+            foreach (Dictionary<string, object> entity in entities)
+            {
+                jsons.Add(Api.ApiJson(entity));
+            }
+            return PrivatePatchMulti(resourceName, resourceMaker, jsons, user, host, apiVersion, sdkVersion, query);
+        }
+
+        static public IEnumerable<SubResource> PrivatePatchMulti(string resourceName, Api.ResourceMaker resourceMaker, IEnumerable<Dictionary<string, object>> entities, User user, string host, string apiVersion, string sdkVersion, Dictionary<string, object> query = null)
+        {
+            Dictionary<string, object> payload = new Dictionary<string, object>
+            {
+                {Api.LastNamePlural(resourceName), entities}
+            };
+
+            dynamic fetchedJsons = Request.Fetch(
+                host: host,
+                apiVersion: apiVersion,
+                sdkVersion: sdkVersion,
+                user: user,
+                method: Request.Patch,
+                path: Api.Endpoint(resourceName),
+                query: query,
+                payload: payload
+            ).Json()[Api.LastNamePlural(resourceName)];
+
+            List<SubResource> returnedEntities = new List<SubResource>();
+            foreach (dynamic json in fetchedJsons)
+            {
+                returnedEntities.Add(Api.FromApiJson(resourceMaker, json));
+            }
+            return returnedEntities;
+        }
+
         static public SubResource PostSingle(string resourceName, Api.ResourceMaker resourceMaker, SubResource entity, User user, string host, string apiVersion, string sdkVersion)
         {
             dynamic json = Request.Fetch(
