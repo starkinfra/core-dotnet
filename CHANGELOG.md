@@ -12,6 +12,8 @@ Given a version number MAJOR.MINOR.PATCH, increment:
 - PATCH version when backwards compatible bug **fixes** are implemented.
 
 ## [Unreleased]
+### Added
+- PatchMulti method, the PATCH counterpart of Post, to update several resources in one request
 
 ## [0.3.0] - 2026-10-15
 ### Added
